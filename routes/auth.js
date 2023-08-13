@@ -12,9 +12,12 @@ router.post("/register", async (req, res) => {
   try {
     const { email, password } = req.body
 
+    console.log("Registration Started")
+    console.log(req)
     // Check if user with the same email already exists
     const existingUser = await User.findOne({ email })
     if (existingUser) {
+      console.log("User with this email already exists")
       return res
         .status(409)
         .json({ message: "User with this email already exists" })
@@ -27,6 +30,7 @@ router.post("/register", async (req, res) => {
     res.status(201).json({ message: "User registered successfully" })
   } catch (error) {
     console.error("Error registering user:", error)
+
     res.status(500).json({ error: "An error occurred while registering user" })
   }
 })
@@ -35,10 +39,14 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body
+    console.log(req)
+    console.log("Login Started")
 
     // Find the user by email
     const user = await User.findOne({ email })
     if (!user) {
+      console.log("User not found")
+
       return res.status(404).json({ message: "User not found" })
     }
     // Check if the password is valid
