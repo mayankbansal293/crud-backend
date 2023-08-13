@@ -20,11 +20,13 @@ var cors = function (req, res, next) {
 app.use(cors)
 app.use(bodyParser.json())
 
-mongoose.connect("mongodb://localhost:27017/myapp", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-
+mongoose.connect(
+  "mongodb+srv://mayankbansal293:mayank%4022@cluster0.93ccvk3.mongodb.net/?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+)
 const User = require("./models/User")
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
